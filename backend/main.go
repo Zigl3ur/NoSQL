@@ -4,10 +4,8 @@ import (
 	"log"
 	"nosql/backend/config"
 	"nosql/backend/internal/db"
-	"nosql/backend/internal/repository"
 
 	"github.com/gin-gonic/gin"
-	"go.mongodb.org/mongo-driver/v2/bson"
 )
 
 func main() {
@@ -24,10 +22,6 @@ func main() {
 		log.Fatalln(err)
 	}
 	defer db.Close(client)
-
-	// movie repo
-	movieCollec := repository.NewMovieRepo(client, config.MongoDb)
-	movieCollec.GetMany(bson.D{})
 
 	router := gin.Default()
 	router.GET("/test", func(c *gin.Context) {

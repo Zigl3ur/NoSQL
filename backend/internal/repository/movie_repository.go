@@ -13,7 +13,19 @@ type MovieRepository struct {
 	collection *mongo.Collection
 }
 
-var errorCollection = errors.New("collection is not defined, call func NewMovieRepo before doing queries on movie collection")
+type EditScope string
+
+const (
+	One  EditScope = "one"
+	Many EditScope = "many"
+)
+
+var (
+	errorCollection      = errors.New("collection is not defined")
+	errorNoMatch         = errors.New("no documents matched the query")
+	errorNoUpdate        = errors.New("no documents were updated")
+	errorInvalidEditType = errors.New("invalid update type")
+)
 
 // get the movie collection
 func NewMovieRepo(client *mongo.Client, dbName string) *MovieRepository {
@@ -53,4 +65,84 @@ func (mrepo *MovieRepository) GetMany(filter bson.D) (*[]models.Movie, error) {
 	}
 
 	return &result, nil
+}
+
+// update one or more documents from movie collection with given filter and updated data
+func (mrepo *MovieRepository) Update(updateType EditScope, filter, update bson.D) error {
+
+	if mrepo.collection == nil {
+		return errorCollection
+	}
+
+	var result *mongo.UpdateResult
+	var err error
+
+	switch updateType {
+	case One:
+		result, err = mrepo.collection.UpdateOne(context.TODO(), filter, update)
+	case Many:
+		result, err = mrepo.collection.UpdateMany(context.TODO(), filter, update)
+	default:
+		return errorInvalidEditType
+	}
+
+	if err != nil {
+		return err
+	}
+
+	if result.MatchedCount == 0 {
+		return errorNoMatch
+	}
+
+	if result.ModifiedCount == 0 {
+		return errorNoUpdate
+	}
+
+	return nil
+}
+
+// update one or more documents from movie collection with given filter and updated data
+func (mrepo *MovieRepository) Delete(deleteType EditScope, filter bson.D) error {
+
+	if mrepo.collection == nil {
+		return errorCollection
+	}
+
+	var result *mongo.DeleteResult
+	var err error
+
+	switch deleteType {
+	case One:
+		result, err = mrepo.collection.DeleteOne(context.TODO(), filter)
+	case Many:
+		result, err = mrepo.collection.DeleteMany(context.TODO(), filter)
+	default:
+		return errorInvalidEditType
+	}
+
+	if err != nil {
+		return err
+	}
+
+	if result.DeletedCount == 0 {
+		return errorNoMatch
+	}
+
+	return nil
+}
+
+// aggregate data of documents from movie collection qith given groupFilter
+func (mrepo *MovieRepository) Aggregate(groupStage bson.D) (*[]bson.M, error) {
+
+	cursor, err := mrepo.collection.Aggregate(context.TODO(), mongo.Pipeline{groupStage})
+	if err != nil {
+		return nil, err
+	}
+
+	var results []bson.M
+	if err = cursor.All(context.TODO(), &results); err != nil {
+		return nil, err
+	}
+
+	return &results, nil
 }
