@@ -1,6 +1,7 @@
 package config
 
 import (
+	"log"
 	"os"
 
 	"github.com/joho/godotenv"
@@ -24,12 +25,13 @@ func LoadConfig() (*Config, error) {
 	mongoUri := os.Getenv("MONGO_URI")
 	mongoDb := os.Getenv("MONGO_DB")
 
-	if port == "" {
+	switch {
+	case port == "":
 		port = "8080"
-	}
-
-	if mongoUri == "" {
-		mongoUri = "mongodb://localhost:27017"
+	case mongoUri == "":
+		log.Fatalln("mongodb uri is empty, please provide one in env var")
+	case mongoDb == "":
+		log.Fatalln("mongodb name is empty, please provide one in env var")
 	}
 
 	return &Config{

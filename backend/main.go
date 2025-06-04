@@ -4,25 +4,33 @@ import (
 	"log"
 	"nosql/backend/config"
 	"nosql/backend/internal/db"
+	"nosql/backend/internal/repository"
 
 	"github.com/gin-gonic/gin"
+	"go.mongodb.org/mongo-driver/v2/bson"
 )
 
 func main() {
-	config, err := config.LoadConfig()
 
+	// get config
+	config, err := config.LoadConfig()
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	var mongoCtx db.MongoCtx
-	if err = mongoCtx.Connect(config.MongoUri); err != nil {
+	// db init
+	client, err := db.Connect(config.MongoUri)
+	if err != nil {
 		log.Fatalln(err)
 	}
-	defer mongoCtx.Close()
+	defer db.Close(client)
+
+	// movie repo
+	movieCollec := repository.NewMovieRepo(client, config.MongoDb)
+	movieCollec.GetMany(bson.D{})
 
 	router := gin.Default()
-	router.GET("/ping", func(c *gin.Context) {
+	router.GET("/test", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "pong",
 		})
