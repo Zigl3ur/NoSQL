@@ -40,7 +40,9 @@ func (mrepo *MovieRepository) GetOne(filter bson.D) (*models.Movie, error) {
 	}
 
 	var result models.Movie
-	if err := mrepo.collection.FindOne(context.TODO(), filter).Decode(&result); err != nil {
+	err := mrepo.collection.FindOne(context.TODO(), filter).Decode(&result)
+
+	if err != nil {
 		return nil, err
 	}
 
@@ -62,6 +64,10 @@ func (mrepo *MovieRepository) GetMany(filter bson.D) (*[]models.Movie, error) {
 	var result []models.Movie
 	if err = cursor.All(context.TODO(), &result); err != nil {
 		return nil, err
+	}
+
+	if result == nil {
+		return nil, mongo.ErrNoDocuments
 	}
 
 	return &result, nil
