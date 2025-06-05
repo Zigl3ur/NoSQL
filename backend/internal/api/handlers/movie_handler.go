@@ -62,7 +62,7 @@ func (m *MovieHandler) HandlerGetMany(c *gin.Context) {
 }
 
 // handler to call the db method updateOne with given param in body
-func (m *MovieHandler) HandlerUpdate(c *gin.Context, EditType repository.EditScope) {
+func (m *MovieHandler) HandlerUpdate(c *gin.Context, editType repository.EditScope) {
 
 	bodyData := utils.BodyToBson(c)
 	if bodyData == nil {
@@ -88,7 +88,7 @@ func (m *MovieHandler) HandlerUpdate(c *gin.Context, EditType repository.EditSco
 	}
 
 	var err error
-	switch EditType {
+	switch editType {
 	case repository.One:
 		err = m.movieRepository.Update(repository.One, filter, update)
 	case repository.Many:
@@ -105,5 +105,68 @@ func (m *MovieHandler) HandlerUpdate(c *gin.Context, EditType repository.EditSco
 	c.JSON(http.StatusOK, gin.H{
 		"success": "successfully updated document(s)",
 	})
+	return
+}
+
+func (m *MovieHandler) HandlerDelete(c *gin.Context, deleteType repository.EditScope) {
+
+	bodyData := utils.BodyToBson(c)
+	if bodyData == nil {
+		return
+	}
+
+	var err error
+	switch deleteType {
+	case repository.One:
+		err = m.movieRepository.Delete(repository.One, bodyData)
+	case repository.Many:
+		err = m.movieRepository.Delete(repository.Many, bodyData)
+	}
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"success": "successfully deleted document(s)",
+	})
+	return
+}
+
+func (m *MovieHandler) HandlerAggregate(c *gin.Context) {
+	bodyData := utils.BodyToBson(c)
+	if bodyData == nil {
+		return
+	}
+
+	if bodyData[0].Key != "aggregation" {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "missing aggregate field",
+		})
+		return
+	}
+
+	array, ok := bodyData[0].Value.(bson.A)
+	if !ok {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "failed to parse aggregation field",
+		})
+		return
+	}
+
+	pipeline := utils.ArrayToBson(array)
+	result, err := m.movieRepository.Aggregate(pipeline)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, result)
 	return
 }

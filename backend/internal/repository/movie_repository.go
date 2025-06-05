@@ -137,10 +137,10 @@ func (mrepo *MovieRepository) Delete(deleteType EditScope, filter bson.D) error 
 	return nil
 }
 
-// aggregate data of documents from movie collection qith given groupFilter
-func (mrepo *MovieRepository) Aggregate(groupStage bson.D) (*[]bson.M, error) {
+// aggregate data of documents from movie collection with given pipeline
+func (mrepo *MovieRepository) Aggregate(pipeline []bson.D) (*[]bson.M, error) {
 
-	cursor, err := mrepo.collection.Aggregate(context.TODO(), mongo.Pipeline{groupStage})
+	cursor, err := mrepo.collection.Aggregate(context.TODO(), pipeline)
 	if err != nil {
 		return nil, err
 	}

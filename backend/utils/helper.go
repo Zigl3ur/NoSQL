@@ -41,3 +41,16 @@ func BodyToBson(c *gin.Context) bson.D {
 
 	return bson
 }
+
+// transform bson.A to a bson.D struct
+func ArrayToBson(array bson.A) []bson.D {
+	var result []bson.D
+
+	for _, elt := range array {
+		if obj, ok := elt.(bson.D); ok {
+			result = append(result, obj)
+		}
+	}
+
+	return result
+}
