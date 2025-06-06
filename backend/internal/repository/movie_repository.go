@@ -7,6 +7,7 @@ import (
 
 	"go.mongodb.org/mongo-driver/v2/bson"
 	"go.mongodb.org/mongo-driver/v2/mongo"
+	"go.mongodb.org/mongo-driver/v2/mongo/options"
 )
 
 type MovieRepository struct {
@@ -33,14 +34,15 @@ func NewMovieRepo(client *mongo.Client, dbName string) *MovieRepository {
 }
 
 // get one document from movie collection with given filter
-func (mrepo *MovieRepository) GetOne(filter bson.D) (*models.Movie, error) {
+func (mrepo *MovieRepository) GetOne(filter, projection bson.D) (*models.Movie, error) {
 
 	if mrepo.collection == nil {
 		return nil, errorCollection
 	}
 
+	opts := options.FindOne().SetProjection(projection)
 	var result models.Movie
-	err := mrepo.collection.FindOne(context.TODO(), filter).Decode(&result)
+	err := mrepo.collection.FindOne(context.TODO(), filter, opts).Decode(&result)
 
 	if err != nil {
 		return nil, err
@@ -50,13 +52,14 @@ func (mrepo *MovieRepository) GetOne(filter bson.D) (*models.Movie, error) {
 }
 
 // get multiple documents from movie collection with given filter
-func (mrepo *MovieRepository) GetMany(filter bson.D) (*[]models.Movie, error) {
+func (mrepo *MovieRepository) GetMany(filter, projection, sort bson.D, skip, limit int64) (*[]models.Movie, error) {
 
 	if mrepo.collection == nil {
 		return nil, errorCollection
 	}
 
-	cursor, err := mrepo.collection.Find(context.TODO(), filter)
+	opts := options.Find().SetProjection(projection).SetSort(sort).SetSkip(int64(skip)).SetLimit(limit)
+	cursor, err := mrepo.collection.Find(context.TODO(), filter, opts)
 	if err != nil {
 		return nil, err
 	}

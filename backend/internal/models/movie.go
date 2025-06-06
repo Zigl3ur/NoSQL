@@ -5,15 +5,15 @@ import (
 )
 
 type Movie struct {
-	ID          bson.ObjectID `bson:"_id" json:"id"`
-	Title       string        `bson:"title" json:"title"`
-	Language    string        `bson:"language" json:"language"`
-	ReleaseDate string        `bson:"release_date" json:"release_date"`
-	Genres      []string      `bson:"genres" json:"genres"`
-	Description string        `bson:"description" json:"description"`
-	Actors      []string      `bson:"actors" json:"actors"`
-	Directors   []string      `bson:"directors" json:"directors"`
-	Popularity  float64       `bson:"popularity" json:"popularity"`
-	Rating      float64       `bson:"rating" json:"rating"`
-	VoteCount   int64         `bson:"vote_count" json:"vote_count"`
+	ID          bson.ObjectID `bson:"_id,omitempty" json:"id,omitempty"`
+	Title       string        `bson:"title,omitempty" json:"title,omitempty"`
+	Language    string        `bson:"language,omitempty" json:"language,omitempty"`
+	ReleaseDate string        `bson:"release_date,omitempty" json:"release_date,omitempty"`
+	Genres      []string      `bson:"genres,omitempty" json:"genres,omitempty"`
+	Description string        `bson:"description,omitempty" json:"description,omitempty"`
+	Actors      []string      `bson:"actors,omitempty" json:"actors,omitempty"`
+	Directors   []string      `bson:"directors,omitempty" json:"directors,omitempty"`
+	Popularity  float64       `bson:"popularity,omitempty" json:"popularity,omitempty"`
+	Rating      float64       `bson:"rating,omitempty" json:"rating,omitempty"`
+	VoteCount   int64         `bson:"vote_count,omitempty" json:"vote_count,omitempty"`
 }

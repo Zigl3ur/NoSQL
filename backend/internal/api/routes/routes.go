@@ -27,7 +27,7 @@ func Setup(r *gin.Engine, client *mongo.Client, config config.Config) {
 		mongo.DELETE("/delete-one", func(c *gin.Context) {
 			movieHandler.HandlerDelete(c, repository.One)
 		})
-		mongo.PUT("/delete-many", func(c *gin.Context) {
+		mongo.DELETE("/delete-many", func(c *gin.Context) {
 			movieHandler.HandlerDelete(c, repository.Many)
 		})
 		mongo.POST("/aggregate", movieHandler.HandlerAggregate)
