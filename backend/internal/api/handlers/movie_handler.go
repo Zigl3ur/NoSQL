@@ -33,21 +33,31 @@ func (m *MovieHandler) HandlerGetOne(c *gin.Context) {
 	}
 
 	// ensure field find-one
-	array, ok := bodyData[0].Value.(bson.A)
-	if !ok && bodyData[0].Key != "find-one" {
+	if len(bodyData) < 1 || bodyData[0].Key != "find-one" {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "failed to parse find-one field",
 		})
 		return
 	}
 
-	// pipeline is filter + projection (if present)
-	pipeline := utils.ArrayToBson(array)
-	filter = pipeline[0]
+	array, ok := bodyData[0].Value.(bson.A)
+	if !ok {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "failed to parse find-one field",
+		})
+		return
+	}
 
-	// if pipeline as projection assign it
-	if len(pipeline) > 1 {
-		projection = pipeline[1]
+	pipeline := utils.ArrayToBson(array)
+
+	// if pipeline has projection assign it
+	if len(pipeline) > 0 {
+		// pipeline is filter + projection (if present)
+		filter = pipeline[0]
+
+		if len(pipeline) > 1 {
+			projection = pipeline[1]
+		}
 	}
 
 	result, err := m.movieRepository.GetOne(filter, projection)
@@ -65,7 +75,6 @@ func (m *MovieHandler) HandlerGetOne(c *gin.Context) {
 // handler to call the db method findMany with given param in body
 func (m *MovieHandler) HandlerGetMany(c *gin.Context) {
 
-	// init var
 	filter := bson.D{}
 	projection := bson.D{}
 	sort := bson.D{}
@@ -75,6 +84,14 @@ func (m *MovieHandler) HandlerGetMany(c *gin.Context) {
 	// get body as bson type
 	bodyData := utils.BodyToBson(c)
 	if bodyData == nil {
+		return
+	}
+
+	// ensure field find-one
+	if len(bodyData) < 1 || bodyData[0].Key != "find-many" {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "failed to parse find-many field",
+		})
 		return
 	}
 
@@ -92,11 +109,15 @@ func (m *MovieHandler) HandlerGetMany(c *gin.Context) {
 
 			// pipeline is filter + projection (if present)
 			pipeline := utils.ArrayToBson(array)
-			filter = pipeline[0]
 
-			// if pipeline as projection assign it
-			if len(pipeline) > 1 {
-				projection = pipeline[1]
+			// if pipeline has projection assign it
+			if len(pipeline) > 0 {
+				// pipeline is filter + projection (if present)
+				filter = pipeline[0]
+
+				if len(pipeline) > 1 {
+					projection = pipeline[1]
+				}
 			}
 
 		case "sort":
@@ -131,7 +152,7 @@ func (m *MovieHandler) HandlerUpdate(c *gin.Context, editType repository.EditSco
 	}
 
 	// check for filter update fields
-	if bodyData[0].Key != "update" {
+	if len(bodyData) < 1 || bodyData[0].Key != "update" {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "missing update field",
 		})
