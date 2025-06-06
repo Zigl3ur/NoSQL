@@ -2,7 +2,7 @@
 
 ## EndPoints
 
-### Mongo DB
+### _MongoDB_
 
 - **POST** `/api/mongo/find-one` - Find one document
 
