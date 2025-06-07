@@ -1,3 +1,4 @@
+import { ModeToggle } from "../theme/mode-toggle";
 import { SidebarTrigger } from "../ui/sidebar";
 
 interface HeaderProps {
@@ -8,7 +9,10 @@ export default function Header({ title }: HeaderProps) {
   return (
     <header className="flex items-center h-15 border-b-2 mb-5">
       <SidebarTrigger />
-      <h1 className="font-bold text-2xl ml-2">{title}</h1>
+      <div className="flex justify-between w-full">
+        <h1 className="font-bold text-2xl ml-2">{title}</h1>
+        <ModeToggle />
+      </div>
     </header>
   );
 }
