@@ -6,6 +6,7 @@ import (
 	"nosql/backend/internal/api/routes"
 	"nosql/backend/internal/db"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -25,6 +26,12 @@ func main() {
 	defer db.Close(client)
 
 	router := gin.Default()
+
+	router.Use(cors.New(cors.Config{
+		AllowOrigins: []string{"http://localhost:5173"},
+		AllowMethods: []string{"GET", "POST", "PUT", "DELETE"},
+		AllowHeaders: []string{"Content-Type"},
+	}))
 
 	routes.Setup(router, client, *config)
 
