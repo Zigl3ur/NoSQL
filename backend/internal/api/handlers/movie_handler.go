@@ -26,6 +26,8 @@ func (m *MovieHandler) HandlerGetOne(c *gin.Context) {
 
 	filter := bson.D{}
 	projection := bson.D{}
+	sort := bson.D{}
+	var skip int64
 
 	bodyData := utils.BodyToBson(c)
 	if bodyData == nil {
@@ -40,27 +42,41 @@ func (m *MovieHandler) HandlerGetOne(c *gin.Context) {
 		return
 	}
 
-	array, ok := bodyData[0].Value.(bson.A)
-	if !ok {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "failed to parse find-one field",
-		})
-		return
-	}
+	// get keys for each field to give to repository find many
+	for i, field := range bodyData {
+		switch field.Key {
+		case "find-one":
+			array, ok := bodyData[0].Value.(bson.A)
+			if !ok && bodyData[0].Key != "find-many" {
+				c.JSON(http.StatusBadRequest, gin.H{
+					"error": "failed to parse find-one field",
+				})
+				return
+			}
 
-	pipeline := utils.ArrayToBson(array)
+			// pipeline is filter + projection (if present)
+			pipeline := utils.ArrayToBson(array)
 
-	// if pipeline has projection assign it
-	if len(pipeline) > 0 {
-		// pipeline is filter + projection (if present)
-		filter = pipeline[0]
+			// if pipeline has projection assign it
+			if len(pipeline) > 0 {
+				// pipeline is filter + projection (if present)
+				filter = pipeline[0]
 
-		if len(pipeline) > 1 {
-			projection = pipeline[1]
+				if len(pipeline) > 1 {
+					projection = pipeline[1]
+				}
+			}
+
+		case "sort":
+			if value, ok := bodyData[i].Value.(bson.D); ok {
+				sort = value
+			}
+		case "skip":
+			skip = utils.FieldAtoi(c, bodyData[i].Value, "skip")
 		}
 	}
 
-	result, err := m.movieRepository.GetOne(filter, projection)
+	result, err := m.movieRepository.GetOne(filter, projection, sort, skip)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),

@@ -34,13 +34,13 @@ func NewMovieRepo(client *mongo.Client, dbName string) *MovieRepository {
 }
 
 // get one document from movie collection with given filter
-func (mrepo *MovieRepository) GetOne(filter, projection bson.D) (*models.Movie, error) {
+func (mrepo *MovieRepository) GetOne(filter, projection, sort bson.D, skip int64) (*models.Movie, error) {
 
 	if mrepo.collection == nil {
 		return nil, errorCollection
 	}
 
-	opts := options.FindOne().SetProjection(projection)
+	opts := options.FindOne().SetProjection(projection).SetSort(sort).SetSkip(skip)
 	var result models.Movie
 	err := mrepo.collection.FindOne(context.TODO(), filter, opts).Decode(&result)
 
