@@ -10,7 +10,7 @@ export default function CustomFindOneRoute() {
     <QueryPage
       headerTitle="Custom Find-One"
       title="Custom Find-One Query"
-      description="Here you can execute a custom find one query on the collection"
+      description="Here you can execute a custom find one query on the movie collection"
       queryJson={{
         test: [{ a: "a" }],
       }}
