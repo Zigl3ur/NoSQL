@@ -23,12 +23,12 @@ export default function MongoCollapsible() {
                 {elt.title}
                 <ChevronDown className="h-5 w-5 transition-transform group-data-[state=open]/subcollapsible:rotate-180" />
               </CollapsibleTrigger>
-              <CollapsibleContent className="space-y-1 border-l-2">
+              <CollapsibleContent className="border-l-2">
                 {elt.links.map((links, linkIndex) => (
                   <Link
                     key={linkIndex}
                     to={links.url}
-                    className="flex p-2 hover:bg-accent rounded-md m-3"
+                    className="flex px-2 py-0.5 hover:bg-accent rounded-md m-3"
                   >
                     {links.title}
                   </Link>

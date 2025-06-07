@@ -7,10 +7,9 @@ import { ThemeProvider } from "./components/theme/theme-provider";
 export default function RootLayout() {
   return (
     <ThemeProvider defaultTheme="system" storageKey="theme">
-      <SidebarProvider>
+      <SidebarProvider defaultOpen={true}>
         <AppSidebar />
         <main className="mx-5 w-full">
-          <Header title="test" />
           <Outlet />
         </main>
       </SidebarProvider>
