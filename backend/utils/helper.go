@@ -3,7 +3,6 @@ package utils
 import (
 	"io"
 	"net/http"
-	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/v2/bson"
@@ -54,19 +53,4 @@ func ArrayToBson(array bson.A) []bson.D {
 	}
 
 	return result
-}
-
-// convert a given string field to int, return 0 if fail
-func FieldAtoi(c *gin.Context, value any, fieldName string) int64 {
-	if value, ok := value.(string); ok {
-		skipInt, err := strconv.Atoi(value)
-		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{
-				"error": "failed to parse skip field",
-			})
-			return 0
-		}
-		return int64(skipInt)
-	}
-	return 0
 }

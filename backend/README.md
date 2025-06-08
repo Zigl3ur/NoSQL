@@ -28,8 +28,8 @@
         { "title": 1 } // projection
       ],
       "sort": { "title": 1 }, // sort
-      "skip": "0", // skip (string)
-      "limit": "2" // limit (string)
+      "skip": 0, // skip
+      "limit": 2 // limit
     }
     ```
 

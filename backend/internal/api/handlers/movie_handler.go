@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"errors"
+	"fmt"
 	"net/http"
 	"nosql/backend/internal/repository"
 	"nosql/backend/utils"
@@ -72,7 +73,10 @@ func (m *MovieHandler) HandlerGetOne(c *gin.Context) {
 				sort = value
 			}
 		case "skip":
-			skip = utils.FieldAtoi(c, bodyData[i].Value, "skip")
+			skipInt, ok := bodyData[i].Value.(int32)
+			if ok {
+				skip = int64(skipInt)
+			}
 		}
 	}
 
@@ -141,12 +145,19 @@ func (m *MovieHandler) HandlerGetMany(c *gin.Context) {
 				sort = value
 			}
 		case "skip":
-			skip = utils.FieldAtoi(c, bodyData[i].Value, "skip")
+			skipInt, ok := bodyData[i].Value.(int32)
+			if ok {
+				skip = int64(skipInt)
+			}
 		case "limit":
-			limit = utils.FieldAtoi(c, bodyData[i].Value, "limit")
+			limitInt, ok := bodyData[i].Value.(int32)
+			if ok {
+				limit = int64(limitInt)
+			}
 		}
 	}
 
+	fmt.Println(sort, skip, limit)
 	result, err := m.movieRepository.GetMany(filter, projection, sort, skip, limit)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
@@ -217,6 +228,7 @@ func (m *MovieHandler) HandlerUpdate(c *gin.Context, editType repository.EditSco
 	return
 }
 
+// handler to call the db method deleteOne or Many with given param in body
 func (m *MovieHandler) HandlerDelete(c *gin.Context, deleteType repository.EditScope) {
 
 	bodyData := utils.BodyToBson(c)
@@ -245,6 +257,7 @@ func (m *MovieHandler) HandlerDelete(c *gin.Context, deleteType repository.EditS
 	return
 }
 
+// handler to call the db method aggregate with given param in body
 func (m *MovieHandler) HandlerAggregate(c *gin.Context) {
 	bodyData := utils.BodyToBson(c)
 	if bodyData == nil {
