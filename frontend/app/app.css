@@ -123,3 +123,9 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* text selection color */
+::selection {
+  color: var(--color-background);
+  background-color: var(--color-primary);
+}

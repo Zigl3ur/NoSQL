@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"errors"
-	"fmt"
 	"net/http"
 	"nosql/backend/internal/repository"
 	"nosql/backend/utils"
@@ -157,7 +156,6 @@ func (m *MovieHandler) HandlerGetMany(c *gin.Context) {
 		}
 	}
 
-	fmt.Println(sort, skip, limit)
 	result, err := m.movieRepository.GetMany(filter, projection, sort, skip, limit)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
