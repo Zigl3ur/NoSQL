@@ -2,7 +2,7 @@ import type { Route } from "../+types/index";
 import QueryPage from "~/components/query-page";
 
 export function meta({}: Route.MetaArgs) {
-  return [{ title: "NoSQL - Find-One Title" }];
+  return [{ title: "NoSQL - Find One Title" }];
 }
 
 export default function FindTitleRoute() {

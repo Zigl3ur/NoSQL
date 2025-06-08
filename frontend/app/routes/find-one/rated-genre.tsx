@@ -2,7 +2,7 @@ import type { Route } from "../+types/index";
 import QueryPage from "~/components/query-page";
 
 export function meta({}: Route.MetaArgs) {
-  return [{ title: "NoSQL - Find-One Highest Rated" }];
+  return [{ title: "NoSQL - Find One Highest Rated" }];
 }
 
 export default function FindRatedGenreRoute() {

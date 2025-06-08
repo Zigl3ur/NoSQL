@@ -2,7 +2,7 @@ import type { Route } from "../+types/index";
 import QueryPage from "~/components/query-page";
 
 export function meta({}: Route.MetaArgs) {
-  return [{ title: "NoSQL - Find-Many By Genres" }];
+  return [{ title: "NoSQL - Find Many By Actors High Rating" }];
 }
 
 export default function FidnManyActorRatingRoute() {

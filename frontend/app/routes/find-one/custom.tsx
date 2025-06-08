@@ -2,7 +2,7 @@ import type { Route } from "../+types/index";
 import QueryPage from "~/components/query-page";
 
 export function meta({}: Route.MetaArgs) {
-  return [{ title: "NoSQL - Find-One Custom" }];
+  return [{ title: "NoSQL - Find One Custom" }];
 }
 
 export default function CustomFindOneRoute() {

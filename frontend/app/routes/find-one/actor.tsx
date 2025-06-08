@@ -2,7 +2,7 @@ import type { Route } from "../+types/index";
 import QueryPage from "~/components/query-page";
 
 export function meta({}: Route.MetaArgs) {
-  return [{ title: "NoSQL - Find-One Actor Recent Movie" }];
+  return [{ title: "NoSQL - Find One Actor Recent Movie" }];
 }
 
 export default function FindOneActorReventRoute() {
