@@ -2,13 +2,17 @@ import { useState } from "react";
 import JsonBlock from "./json-block";
 import Header from "./navigation/header";
 import { Button } from "./ui/button";
-import { Loader, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
+import CustomQueryForm from "./custom-query-form";
 
 interface PageProps {
   headerTitle: string;
   title: string;
   description: string;
-  queryJson: string;
+  queryJson?: string;
+  custom?: boolean;
+  customLimit?: boolean;
+  placeholder?: string;
   endpoint: string;
   body: Object;
 }
@@ -18,18 +22,36 @@ export default function QueryPage({
   title,
   description,
   queryJson,
+  custom,
+  customLimit,
   endpoint,
   body,
 }: PageProps) {
+  const [customQuery, setCustomQuery] = useState<string>("");
+  const [limit, setLimit] = useState<string>("");
+  const [sort, setSort] = useState<string>("");
+  const [skip, setSkip] = useState<string>("");
+
   const [response, setResponse] = useState<Object>({});
   const [loading, setLoading] = useState<boolean>(false);
 
   const query = async () => {
     setLoading(true);
     try {
+      let customBody;
+      const tag = endpoint.split("/")[3]; // get the tag of the query
+      if (custom) {
+        customBody = {
+          [tag]: JSON.parse(customQuery),
+          sort: JSON.parse(sort || "{}"),
+          skip: skip,
+          limit: limit,
+        };
+      }
+
       const data = await fetch(`${import.meta.env.VITE_BACKEND}${endpoint}`, {
         method: "POST",
-        body: JSON.stringify(body),
+        body: JSON.stringify(custom ? customBody : body),
         headers: {
           "Content-Type": "application/json",
         },
@@ -56,13 +78,30 @@ export default function QueryPage({
         </h1>
         <p className="text-sm md:text-base text-gray-600">{description}</p>
         <div className="flex flex-col gap-4 md:gap-6">
-          <JsonBlock title="Query" content={queryJson} />
+          {custom ? (
+            <CustomQueryForm
+              filterProjPlaceholder={`[
+  { "title": "Star Wars" }, // filter
+  { "titlle": 1, "description": 1 } // projection
+]`}
+              filterProj={customQuery}
+              onChangeFilterProj={setCustomQuery}
+              limit={customLimit ? limit : undefined}
+              onChangeLimit={customLimit ? setLimit : undefined}
+              sort={sort}
+              onChangeSort={setSort}
+              skip={skip}
+              onChangeSkip={setSkip}
+            />
+          ) : (
+            <JsonBlock title="Query" content={queryJson || ""} />
+          )}
           <JsonBlock
             title="Result"
             content={JSON.stringify(response, null, 2)}
           />
         </div>
-        <div className="flex justify-center md:justify-end">
+        <div className="flex justify-center sm:justify-end">
           <Button onClick={query} className="w-full sm:w-auto min-w-[120px]">
             {loading && <Loader2 className="animate-spin mr-2" />}Query
           </Button>

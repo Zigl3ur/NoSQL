@@ -11,9 +11,10 @@ export default function IndexRoute() {
       headerTitle="Home"
       title="Query"
       description="test"
-      queryJson={{
+      queryJson={`{
         test: [{ a: "a" }],
-      }}
+      }
+    `}
       endpoint="/api/mongo/find-one"
       body={{ "find-one": [] }}
     />

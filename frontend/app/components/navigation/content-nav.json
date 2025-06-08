@@ -14,7 +14,7 @@
                     },
                     {
                         "title": "Find actor within recent",
-                        "url": "/find-one/actor-recent-movies"
+                        "url": "/find-one/actor-recent-movie"
                     },
                     {
                         "title": "Custom Query",

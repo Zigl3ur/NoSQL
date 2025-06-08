@@ -8,12 +8,15 @@ export function meta({}: Route.MetaArgs) {
 export default function CustomFindOneRoute() {
   return (
     <QueryPage
-      headerTitle="Custom Find-One"
+      headerTitle="Find One"
       title="Custom Find-One Query"
       description="Here you can execute a custom find one query on the movie collection"
-      queryJson={{
-        test: [{ a: "a" }],
-      }}
+      custom={true}
+      placeholder={`[
+    { "title": "Star Wars" },
+    { "titlle": 1, "description": 1 }
+],
+  sort: { "rating": -1 }`}
       endpoint="/api/mongo/find-one"
       body={{ "find-one": [] }}
     />
