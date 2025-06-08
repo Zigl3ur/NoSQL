@@ -76,8 +76,8 @@
                         "url": "/update-many/rating"
                     },
                     {
-                        "title": "Update vote count",
-                        "url": "/update-many/vote-count"
+                        "title": "Update language",
+                        "url": "/update-many/language"
                     },
                     {
                         "title": "Custom Query",

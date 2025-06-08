@@ -32,5 +32,11 @@ export default [
     route("/update-one/rating", "./routes/update-one/rating.tsx"),
     route("/update-one/genres", "./routes/update-one/genres.tsx"),
     route("/update-one/vote-count", "./routes/update-one/vote-count.tsx"),
+
+    // update-many
+    route("/update-many", "./routes/update-many/custom.tsx"),
+    route("/update-many/rating", "./routes/update-many/popularity.tsx"),
+    route("/update-many/popularity", "./routes/update-many/rating.tsx"),
+    route("/update-many/language", "./routes/update-many/language.tsx"),
   ]),
 ] satisfies RouteConfig;
