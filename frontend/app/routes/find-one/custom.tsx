@@ -13,10 +13,9 @@ export default function CustomFindOneRoute() {
       description="Here you can execute a custom find one query on the movie collection"
       custom={true}
       placeholder={`[
-    { "title": "Star Wars" },
-    { "titlle": 1, "description": 1 }
-],
-  sort: { "rating": -1 }`}
+  { "title": "Star Wars" }, // filter
+  { "titlle": 1, "description": 1 } // projection
+]`}
       endpoint="/api/mongo/find-one"
       body={{ "find-one": [] }}
     />

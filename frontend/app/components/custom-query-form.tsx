@@ -30,7 +30,7 @@ export default function CustomQueryForm({
         placeholder={filterProjPlaceholder || ""}
         value={filterProj}
         onChange={(e) => onChangeFilterProj(e.target.value)}
-        className="min-h-[200px]"
+        className="min-h-50"
       />
       {onChangeLimit && (
         <Input

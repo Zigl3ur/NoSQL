@@ -24,6 +24,7 @@ export default function QueryPage({
   queryJson,
   custom,
   customLimit,
+  placeholder,
   endpoint,
   body,
 }: PageProps) {
@@ -42,10 +43,10 @@ export default function QueryPage({
       const tag = endpoint.split("/")[3]; // get the tag of the query
       if (custom) {
         customBody = {
-          [tag]: JSON.parse(customQuery),
+          [tag]: JSON.parse(customQuery || "[]"),
           sort: JSON.parse(sort || "{}"),
-          skip: skip,
-          limit: limit,
+          skip: parseInt(skip),
+          limit: parseInt(limit),
         };
       }
 
@@ -80,10 +81,7 @@ export default function QueryPage({
         <div className="flex flex-col gap-4 md:gap-6">
           {custom ? (
             <CustomQueryForm
-              filterProjPlaceholder={`[
-  { "title": "Star Wars" }, // filter
-  { "titlle": 1, "description": 1 } // projection
-]`}
+              filterProjPlaceholder={placeholder || ""}
               filterProj={customQuery}
               onChangeFilterProj={setCustomQuery}
               limit={customLimit ? limit : undefined}

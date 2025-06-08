@@ -34,8 +34,8 @@
                         "url": "/find-many/recent-popular"
                     },
                     {
-                        "title": "Find with Text",
-                        "url": "/find-many/text"
+                        "title": "Find with actors high rating",
+                        "url": "/find-many/actors-high-rating"
                     },
                     {
                         "title": "Custom Query",

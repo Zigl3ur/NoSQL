@@ -6,17 +6,5 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function IndexRoute() {
-  return (
-    <QueryPage
-      headerTitle="Home"
-      title="Query"
-      description="test"
-      queryJson={`{
-        test: [{ a: "a" }],
-      }
-    `}
-      endpoint="/api/mongo/find-one"
-      body={{ "find-one": [] }}
-    />
-  );
+  return <>Hello</>;
 }
