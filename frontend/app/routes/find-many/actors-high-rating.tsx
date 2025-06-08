@@ -16,6 +16,7 @@ export default function FidnManyActorRatingRoute() {
   { title: 1, actors: 1, rating: 1 }
 ).limit(3);`}
       endpoint="/api/mongo/find-many"
+      method="POST"
       body={{
         "find-many": [
           {

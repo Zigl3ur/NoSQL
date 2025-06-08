@@ -12,8 +12,11 @@ interface PageProps {
   queryJson?: string;
   custom?: boolean;
   customLimit?: boolean;
+  customSort?: boolean;
+  customSkip?: boolean;
   placeholder?: string;
   endpoint: string;
+  method: "POST" | "PUT" | "DELETE";
   body: Object;
 }
 
@@ -24,7 +27,10 @@ export default function QueryPage({
   queryJson,
   custom,
   customLimit,
+  customSort,
+  customSkip,
   placeholder,
+  method,
   endpoint,
   body,
 }: PageProps) {
@@ -39,8 +45,8 @@ export default function QueryPage({
   const query = async () => {
     setLoading(true);
     try {
+      const tag = Object.keys(body)[0];
       let customBody;
-      const tag = endpoint.split("/")[3]; // get the tag of the query
       if (custom) {
         customBody = {
           [tag]: JSON.parse(customQuery || "[]"),
@@ -51,7 +57,7 @@ export default function QueryPage({
       }
 
       const data = await fetch(`${import.meta.env.VITE_BACKEND}${endpoint}`, {
-        method: "POST",
+        method: method,
         body: JSON.stringify(custom ? customBody : body),
         headers: {
           "Content-Type": "application/json",
@@ -86,10 +92,10 @@ export default function QueryPage({
               onChangeFilterProj={setCustomQuery}
               limit={customLimit ? limit : undefined}
               onChangeLimit={customLimit ? setLimit : undefined}
-              sort={sort}
-              onChangeSort={setSort}
-              skip={skip}
-              onChangeSkip={setSkip}
+              sort={customSort ? sort : undefined}
+              onChangeSort={customSort ? setSort : undefined}
+              skip={customSkip ? skip : undefined}
+              onChangeSkip={customSkip ? setSkip : undefined}
             />
           ) : (
             <JsonBlock title="Query" content={queryJson || ""} />

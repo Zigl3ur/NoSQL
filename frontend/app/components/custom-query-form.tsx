@@ -7,10 +7,10 @@ interface CustomQueryFormProps {
   onChangeFilterProj: (value: string) => void;
   limit?: string;
   onChangeLimit?: (value: string) => void;
-  sort: string;
-  onChangeSort: (value: string) => void;
-  skip: string;
-  onChangeSkip: (value: string) => void;
+  sort?: string;
+  onChangeSort?: (value: string) => void;
+  skip?: string;
+  onChangeSkip?: (value: string) => void;
 }
 
 export default function CustomQueryForm({
@@ -39,16 +39,20 @@ export default function CustomQueryForm({
           onChange={(e) => onChangeLimit(e.target.value)}
         />
       )}
-      <Input
-        placeholder='sort by a criteria like: { "rating": -1 }'
-        value={sort}
-        onChange={(e) => onChangeSort(e.target.value)}
-      />
-      <Input
-        placeholder="skip a number of documents"
-        value={skip}
-        onChange={(e) => onChangeSkip(e.target.value)}
-      />
+      {onChangeSort && (
+        <Input
+          placeholder='sort by a criteria like: { "rating": -1 }'
+          value={sort}
+          onChange={(e) => onChangeSort(e.target.value)}
+        />
+      )}
+      {onChangeSkip && (
+        <Input
+          placeholder="skip a number of documents"
+          value={skip}
+          onChange={(e) => onChangeSkip(e.target.value)}
+        />
+      )}
     </div>
   );
 }

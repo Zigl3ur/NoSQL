@@ -15,6 +15,7 @@ export default function FindTitleRoute() {
   { title: "Pacific Rim" }
 )`}
       endpoint="/api/mongo/find-one"
+      method="POST"
       body={{ "find-one": [{ title: "Pacific Rim" }] }}
     />
   );

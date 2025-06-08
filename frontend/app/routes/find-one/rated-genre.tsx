@@ -16,6 +16,7 @@ export default function FindRatedGenreRoute() {
   { title: 1, rating: 1, release_date: 1 },
 ).sort({ sort: { rating: -1 } });`}
       endpoint="/api/mongo/find-one"
+      method="POST"
       body={{
         "find-one": [
           { genres: "Adventure" },

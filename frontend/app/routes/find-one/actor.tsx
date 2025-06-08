@@ -16,6 +16,7 @@ export default function FindOneActorReventRoute() {
   { title: 1, actors: 1, release_date: 1 }
 );`}
       endpoint="/api/mongo/find-one"
+      method="POST"
       body={{
         "find-one": [
           { actors: "Jason Momoa", release_date: { $gte: "2025-01-01" } },

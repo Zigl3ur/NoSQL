@@ -16,6 +16,7 @@ export default function FidnManyWithGenresRouter() {
   { title: 1, genres: 1, rating: 1 }
 );`}
       endpoint="/api/mongo/find-many"
+      method="POST"
       body={{
         "find-many": [
           { genres: { $all: ["Comedy", "Fantasy"] } },

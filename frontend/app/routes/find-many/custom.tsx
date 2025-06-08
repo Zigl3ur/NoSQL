@@ -13,11 +13,14 @@ export default function CustomFindManyRoute() {
       description="Here you can execute a custom find many query on the movie collection"
       custom={true}
       customLimit={true}
+      customSkip={true}
+      customSort={true}
       placeholder={`[
     { "actors": { "$all" : ["Keanu Reeves", "Carrie-Anne Moss"]} },
     { "title": 1, "description": 1 }
 ]`}
       endpoint="/api/mongo/find-many"
+      method="POST"
       body={{ "find-many": [] }}
     />
   );

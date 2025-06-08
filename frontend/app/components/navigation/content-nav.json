@@ -86,27 +86,6 @@
                 ]
             },
             {
-                "title": "Aggregate",
-                "links": [
-                    {
-                        "title": "Avg rating and movie count",
-                        "url": "/aggregate/avg-rating-movie-genre"
-                    },
-                    {
-                        "title": "Top 5 directors",
-                        "url": "/aggregate/top-5-directors"
-                    },
-                    {
-                        "title": "Group by release year",
-                        "url": "/aggregate/group-release-popularity"
-                    },
-                    {
-                        "title": "Custom Query",
-                        "url": "/aggregate"
-                    }
-                ]
-            },
-            {
                 "title": "Delete One",
                 "links": [
                     {
@@ -145,6 +124,27 @@
                     {
                         "title": "Custom Query",
                         "url": "/delete-many"
+                    }
+                ]
+            },
+            {
+                "title": "Aggregate",
+                "links": [
+                    {
+                        "title": "Avg rating and movie count",
+                        "url": "/aggregate/avg-rating-movie-genre"
+                    },
+                    {
+                        "title": "Top 5 directors",
+                        "url": "/aggregate/top-5-directors"
+                    },
+                    {
+                        "title": "Group by release year",
+                        "url": "/aggregate/group-release-popularity"
+                    },
+                    {
+                        "title": "Custom Query",
+                        "url": "/aggregate"
                     }
                 ]
             }
