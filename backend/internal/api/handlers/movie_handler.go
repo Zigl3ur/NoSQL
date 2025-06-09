@@ -292,7 +292,7 @@ func (m *MovieHandler) HandlerAggregate(c *gin.Context) {
 
 	if bodyData[0].Key != "aggregation" {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "missing aggregate field",
+			"error": "missing aggregation field",
 		})
 		return
 	}
@@ -305,7 +305,15 @@ func (m *MovieHandler) HandlerAggregate(c *gin.Context) {
 		return
 	}
 
+	if len(array) == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "aggregation pipeline cannot be empty",
+		})
+		return
+	}
+
 	pipeline := utils.ArrayToBson(array)
+
 	result, err := m.movieRepository.Aggregate(pipeline)
 
 	if err != nil {
