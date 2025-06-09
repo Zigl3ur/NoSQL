@@ -9,7 +9,7 @@ export default function CustomDeleteOneRoute() {
   return (
     <QueryPage
       headerTitle="Delete One"
-      title="Custom Delete-One Query"
+      title="Custom Delete One Query"
       description="Here you can execute a custom delete one query on the movie collection"
       custom={true}
       placeholder={`[

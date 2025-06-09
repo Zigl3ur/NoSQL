@@ -97,8 +97,8 @@
                         "url": "/delete-one/director"
                     },
                     {
-                        "title": "Delete lowest rated family",
-                        "url": "/delete-one/lowest-rated-family"
+                        "title": "Delete by genre",
+                        "url": "/delete-one/genre"
                     },
                     {
                         "title": "Custom Query",
@@ -111,7 +111,7 @@
                 "links": [
                     {
                         "title": "Delete low vote count",
-                        "url": "/delete-many/low-vote-count"
+                        "url": "/delete-many/low-vote"
                     },
                     {
                         "title": "Delete low popularity",

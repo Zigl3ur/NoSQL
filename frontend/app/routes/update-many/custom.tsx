@@ -9,7 +9,7 @@ export default function CustomUpdateManyRoute() {
   return (
     <QueryPage
       headerTitle="Update Many"
-      title="Custom Update-Many Query"
+      title="Custom Update Many Query"
       description="Here you can execute a custom update many query on the movie collection"
       custom={true}
       placeholder={`[

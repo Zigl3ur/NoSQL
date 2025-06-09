@@ -5,12 +5,12 @@ export function meta({}: Route.MetaArgs) {
   return [{ title: "NoSQL - Delete One Lowest Rated Family" }];
 }
 
-export default function DeleteOneLowestRatedFamilyRoute() {
+export default function DeleteOneGenreRoute() {
   return (
     <QueryPage
       headerTitle="Delete One"
-      title="Delete One Lowest Rated Family"
-      description="Delete the lowest rated family movie in the collection by its genre"
+      title="Delete Oneby Genre"
+      description="Delete a movie in the collection by its genre"
       queryJson={`db.movies.deleteOne({ genres: "Family" });`}
       endpoint="/api/mongo/delete-one"
       method="DELETE"

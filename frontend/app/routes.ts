@@ -43,12 +43,16 @@ export default [
     route("/delete-one", "./routes/delete-one/custom.tsx"),
     route("/delete-one/title", "./routes/delete-one/title.tsx"),
     route("/delete-one/director", "./routes/delete-one/director.tsx"),
-    route(
-      "/delete-one/lowest-rated-family",
-      "./routes/delete-one/lowest-rated-family.tsx"
-    ),
+    route("/delete-one/genre", "./routes/delete-one/genre.tsx"),
 
     // delete-many
+    route("/delete-many", "./routes/delete-many/custom.tsx"),
+    route("/delete-many/low-vote", "./routes/delete-many/low-vote.tsx"),
+    route(
+      "/delete-many/low-popularity",
+      "./routes/delete-many/low-popularity.tsx"
+    ),
+    route("/delete-many/older-than", "./routes/delete-many/older-than.tsx"),
 
     // aggregate
   ]),

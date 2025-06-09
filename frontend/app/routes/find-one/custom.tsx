@@ -9,7 +9,7 @@ export default function CustomFindOneRoute() {
   return (
     <QueryPage
       headerTitle="Find One"
-      title="Custom Find-One Query"
+      title="Custom Find One Query"
       description="Here you can execute a custom find one query on the movie collection"
       custom={true}
       customSkip={true}

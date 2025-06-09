@@ -9,7 +9,7 @@ export default function CustomFindManyRoute() {
   return (
     <QueryPage
       headerTitle="Find Many"
-      title="Custom Find-Many Query"
+      title="Custom Find Many Query"
       description="Here you can execute a custom find many query on the movie collection"
       custom={true}
       customLimit={true}

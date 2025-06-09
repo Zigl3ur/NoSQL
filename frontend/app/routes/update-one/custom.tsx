@@ -9,7 +9,7 @@ export default function CustomUpdateOneRoute() {
   return (
     <QueryPage
       headerTitle="Update One"
-      title="Custom Update-One Query"
+      title="Custom Update One Query"
       description="Here you can execute a custom update one query on the movie collection"
       custom={true}
       placeholder={`[
