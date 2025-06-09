@@ -38,5 +38,18 @@ export default [
     route("/update-many/rating", "./routes/update-many/popularity.tsx"),
     route("/update-many/popularity", "./routes/update-many/rating.tsx"),
     route("/update-many/language", "./routes/update-many/language.tsx"),
+
+    // delete-one
+    route("/delete-one", "./routes/delete-one/custom.tsx"),
+    route("/delete-one/title", "./routes/delete-one/title.tsx"),
+    route("/delete-one/director", "./routes/delete-one/director.tsx"),
+    route(
+      "/delete-one/lowest-rated-family",
+      "./routes/delete-one/lowest-rated-family.tsx"
+    ),
+
+    // delete-many
+
+    // aggregate
   ]),
 ] satisfies RouteConfig;
