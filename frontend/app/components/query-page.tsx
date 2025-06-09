@@ -98,7 +98,7 @@ export default function QueryPage({
               onChangeSkip={customSkip ? setSkip : undefined}
             />
           ) : (
-            <JsonBlock title="Query" content={queryJson || ""} />
+            <JsonBlock title="Query" fit={true} content={queryJson || ""} />
           )}
           <JsonBlock
             title="Result"

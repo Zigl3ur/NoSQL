@@ -55,5 +55,18 @@ export default [
     route("/delete-many/older-than", "./routes/delete-many/older-than.tsx"),
 
     // aggregate
+    route("/aggregate", "./routes/aggregate/custom.tsx"),
+    route(
+      "/aggregate/avg-rating-movie-genre",
+      "./routes/aggregate/avg-rating-movie-genre.tsx"
+    ),
+    route(
+      "/aggregate/top-5-directors",
+      "./routes/aggregate/top-5-directors.tsx"
+    ),
+    route(
+      "/aggregate/group-release-popularity",
+      "./routes/aggregate/group-release-popularity.tsx"
+    ),
   ]),
 ] satisfies RouteConfig;

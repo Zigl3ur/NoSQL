@@ -5,9 +5,10 @@ import { useEffect, useState } from "react";
 interface JsonProps {
   title: string;
   content: string;
+  fit?: boolean;
 }
 
-export default function JsonBlock({ title, content }: JsonProps) {
+export default function JsonBlock({ title, content, fit }: JsonProps) {
   const [copied, setCopied] = useState<boolean>(false);
 
   const copy = () => {
@@ -36,7 +37,11 @@ export default function JsonBlock({ title, content }: JsonProps) {
           )}
         </Button>
       </div>
-      <div className="border-2 p-3 sm:p-4 rounded-md bg-accent min-h-14 max-h-48 sm:max-h-64 lg:max-h-80 overflow-y-auto">
+      <div
+        className={`border-2 p-3 sm:p-4 rounded-md bg-accent ${
+          !fit && "min-h-14 max-h-48 sm:max-h-64 lg:max-h-80"
+        } overflow-y-auto`}
+      >
         <pre className="text-xs sm:text-sm whitespace-pre-wrap break-words overflow-wrap-anywhere leading-relaxed">
           {content}
         </pre>
