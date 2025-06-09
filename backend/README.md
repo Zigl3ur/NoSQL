@@ -59,11 +59,19 @@
 
   - **Body**:
     ```json
-    { "title": "A Minecraft Movie" } // filter
+    {
+      "delete": [
+        { "title": "A Minecraft Movie" } // filter
+      ]
+    }
     ```
 
 - **DELETE** `/api/mongo/delete-many` - Delete many documents
   - **Body**:
     ```json
-    { "actors": "Keanu Reeves" } // filter
+    {
+      "delete": [
+        { "actors": "Jack Black" } // filter
+      ]
+    }
     ```

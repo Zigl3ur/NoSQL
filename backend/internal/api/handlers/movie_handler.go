@@ -234,12 +234,40 @@ func (m *MovieHandler) HandlerDelete(c *gin.Context, deleteType repository.EditS
 		return
 	}
 
+	// check for delete field
+	if len(bodyData) < 1 || bodyData[0].Key != "delete" {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "missing delete field",
+		})
+		return
+	}
+
+	array, ok := bodyData[0].Value.(bson.A)
+	if !ok {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "failed to parse delete field",
+		})
+		return
+	}
+
+	pipeline := utils.ArrayToBson(array)
+
+	// ensure filter field
+	if len(pipeline) != 1 {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "failed to parse delete field",
+		})
+		return
+	}
+
+	filter := pipeline[0]
+
 	var err error
 	switch deleteType {
 	case repository.One:
-		err = m.movieRepository.Delete(repository.One, bodyData)
+		err = m.movieRepository.Delete(repository.One, filter)
 	case repository.Many:
-		err = m.movieRepository.Delete(repository.Many, bodyData)
+		err = m.movieRepository.Delete(repository.Many, filter)
 	}
 
 	if err != nil {
