@@ -8,9 +8,10 @@ import (
 )
 
 type Config struct {
-	Port     string
-	MongoUri string
-	MongoDb  string
+	Port       string
+	MongoUri   string
+	MongoDb    string
+	ElasticUrl string
 }
 
 // load config by .env file or env var,
@@ -24,6 +25,7 @@ func LoadConfig() (*Config, error) {
 	port := os.Getenv("PORT")
 	mongoUri := os.Getenv("MONGO_URI")
 	mongoDb := os.Getenv("MONGO_DB")
+	elasticUrl := os.Getenv("ELASTIC_URL")
 
 	switch {
 	case port == "":
@@ -32,11 +34,14 @@ func LoadConfig() (*Config, error) {
 		log.Fatalln("mongodb uri is empty, please provide one in env var")
 	case mongoDb == "":
 		log.Fatalln("mongodb name is empty, please provide one in env var")
+	case elasticUrl == "":
+		log.Fatalln("elasticsearch url is empty, please provide one in env var")
 	}
 
 	return &Config{
-		Port:     port,
-		MongoUri: mongoUri,
-		MongoDb:  mongoDb,
+		Port:       port,
+		MongoUri:   mongoUri,
+		MongoDb:    mongoDb,
+		ElasticUrl: elasticUrl,
 	}, nil
 }

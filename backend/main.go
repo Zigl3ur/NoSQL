@@ -25,15 +25,21 @@ func main() {
 	}
 	defer db.Close(client)
 
+	// elasticsearch init
+	elasticClient, err := db.ElasticInit(config.ElasticUrl)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
 	router := gin.Default()
 
 	router.Use(cors.New(cors.Config{
-		AllowOrigins: []string{"http://localhost:5173", "http://localhost:3000"},
-		AllowMethods: []string{"GET", "POST", "PUT", "DELETE"},
+		AllowOrigins: []string{"http://localhost:3000"},
+		AllowMethods: []string{"POST", "PUT", "DELETE"},
 		AllowHeaders: []string{"Content-Type"},
 	}))
 
-	routes.Setup(router, client, *config)
+	routes.Setup(router, client, elasticClient, *config)
 
 	router.Run(":" + config.Port)
 }
