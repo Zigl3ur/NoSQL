@@ -13,10 +13,7 @@ import (
 func main() {
 
 	// get config
-	config, err := config.LoadConfig()
-	if err != nil {
-		log.Fatalln(err)
-	}
+	config := config.LoadConfig()
 
 	// db init
 	client, err := db.Connect(config.MongoUri)

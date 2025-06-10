@@ -3,7 +3,6 @@ package handlers
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"os"
 
@@ -61,15 +60,13 @@ func (h *ElasticHandler) HandlerInit(c *gin.Context) {
 		h.esClient.Indices.Create.WithBody(bytes.NewReader([]byte(mapping))),
 	)
 
-	fmt.Println(res)
-
 	if err != nil || res.IsError() {
 		c.JSON(500, gin.H{"error": "Failed to create index"})
 		return
 	}
 	defer res.Body.Close()
 
-	bulkJson, err := os.ReadFile("../bulk-movies.json")
+	bulkJson, err := os.ReadFile("./bulk-movies.json")
 
 	if err != nil {
 		c.JSON(500, gin.H{"error": "Failed to read bulk JSON file"})

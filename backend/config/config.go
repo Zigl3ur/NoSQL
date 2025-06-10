@@ -16,10 +16,10 @@ type Config struct {
 
 // load config by .env file or env var,
 // return config
-func LoadConfig() (*Config, error) {
+func LoadConfig() *Config {
 	// for dev it load .env file
 	if err := godotenv.Load(); err != nil {
-		return nil, err
+		log.Println("No .env file found, using environment variables")
 	}
 
 	port := os.Getenv("PORT")
@@ -43,5 +43,5 @@ func LoadConfig() (*Config, error) {
 		MongoUri:   mongoUri,
 		MongoDb:    mongoDb,
 		ElasticUrl: elasticUrl,
-	}, nil
+	}
 }

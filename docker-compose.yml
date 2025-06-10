@@ -1,0 +1,55 @@
+services:
+  nosql-mongo:
+    image: mongo:latest
+    container_name: nosql-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+  nosql-elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.0.2
+    container_name: nosql-elasticsearch
+    restart: unless-stopped
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    ports:
+      - "9200:9200"
+    deploy:
+      resources:
+        limits:
+          memory: 1024M
+
+  nosql-backend:
+    container_name: nosql-backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      - PORT=8080
+      - MONGO_URI=mongodb://nosql-mongo:27017
+      - MONGO_DB=projet
+      - ELASTIC_URL=http://nosql-elasticsearch:9200
+    ports:
+      - "8080:8080"
+    depends_on:
+      - nosql-mongo
+      - nosql-elasticsearch
+    restart: unless-stopped
+
+  nosql-frontend:
+    container_name: nosql-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    environment:
+      - VITE_BACKEND=http://nosql-backend:8080
+    ports:
+      - "3000:3000"
+    depends_on:
+      - nosql-backend
+    restart: unless-stopped
+
+networks:
+  default:
+    driver: bridge
+    name: nosql-network

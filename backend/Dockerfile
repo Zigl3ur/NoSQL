@@ -3,11 +3,13 @@ WORKDIR /app
 COPY go.mod go.sum ./
 RUN go mod download
 COPY . .
-RUN go build -o /app/nosql-backend main.go
+RUN CGO_ENABLED=0 go build -o server main.go
 
 FROM alpine:latest
 WORKDIR /app
-COPY --from=builder /app/nosql-backend .
+COPY bulk-movies.json .
+COPY movies.json .
+COPY --from=builder /app/server .
 ENV PORT=8080
 EXPOSE $PORT
-CMD ["./nosql-backend"]
+CMD ["./server"]

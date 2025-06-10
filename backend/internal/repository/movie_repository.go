@@ -51,7 +51,7 @@ func (mrepo *MovieRepository) DeleteCollection() error {
 // initialize the movie collection with data
 func (mrepo *MovieRepository) InitCollection() error {
 
-	json, err := os.ReadFile("../movies.json")
+	json, err := os.ReadFile("./movies.json")
 	if err != nil {
 		return err
 	}
