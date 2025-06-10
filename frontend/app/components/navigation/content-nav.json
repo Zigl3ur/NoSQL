@@ -6,19 +6,19 @@
                 "links": [
                     {
                         "title": "Find by Title",
-                        "url": "/find-one/title"
+                        "url": "/mongo/find-one/title"
                     },
                     {
                         "title": "Find highest rated by Genre",
-                        "url": "/find-one/rated-genre"
+                        "url": "/mongo/find-one/rated-genre"
                     },
                     {
                         "title": "Find actor within recent",
-                        "url": "/find-one/actor-recent-movie"
+                        "url": "/mongo/find-one/actor-recent-movie"
                     },
                     {
                         "title": "Custom Query",
-                        "url": "/find-one"
+                        "url": "/mongo/find-one"
                     }
                 ]
             },
@@ -27,19 +27,19 @@
                 "links": [
                     {
                         "title": "Find specific genres",
-                        "url": "/find-many/genres"
+                        "url": "/mongo/find-many/genres"
                     },
                     {
                         "title": "Find recent high popularity",
-                        "url": "/find-many/recent-popular"
+                        "url": "/mongo/find-many/recent-popular"
                     },
                     {
                         "title": "Find with actors high rating",
-                        "url": "/find-many/actors-high-rating"
+                        "url": "/mongo/find-many/actors-high-rating"
                     },
                     {
                         "title": "Custom Query",
-                        "url": "/find-many"
+                        "url": "/mongo/find-many"
                     }
                 ]
             },
@@ -48,19 +48,19 @@
                 "links": [
                     {
                         "title": "Update movie rating",
-                        "url": "/update-one/rating"
+                        "url": "/mongo/update-one/rating"
                     },
                     {
                         "title": "Update genres",
-                        "url": "/update-one/genres"
+                        "url": "/mongo/update-one/genres"
                     },
                     {
                         "title": "Update vote count",
-                        "url": "/update-one/vote-count"
+                        "url": "/mongo/update-one/vote-count"
                     },
                     {
                         "title": "Custom Query",
-                        "url": "/update-one"
+                        "url": "/mongo/update-one"
                     }
                 ]
             },
@@ -69,19 +69,19 @@
                 "links": [
                     {
                         "title": "Update popularity",
-                        "url": "/update-many/popularity"
+                        "url": "/mongo/update-many/popularity"
                     },
                     {
                         "title": "Update rating",
-                        "url": "/update-many/rating"
+                        "url": "/mongo/update-many/rating"
                     },
                     {
                         "title": "Update language",
-                        "url": "/update-many/language"
+                        "url": "/mongo/update-many/language"
                     },
                     {
                         "title": "Custom Query",
-                        "url": "/update-many"
+                        "url": "/mongo/update-many"
                     }
                 ]
             },
@@ -90,19 +90,19 @@
                 "links": [
                     {
                         "title": "Delete by title",
-                        "url": "/delete-one/title"
+                        "url": "/mongo/delete-one/title"
                     },
                     {
                         "title": "Delete by director",
-                        "url": "/delete-one/director"
+                        "url": "/mongo/delete-one/director"
                     },
                     {
                         "title": "Delete by genre",
-                        "url": "/delete-one/genre"
+                        "url": "/mongo/delete-one/genre"
                     },
                     {
                         "title": "Custom Query",
-                        "url": "/delete-one"
+                        "url": "/mongo/delete-one"
                     }
                 ]
             },
@@ -111,19 +111,19 @@
                 "links": [
                     {
                         "title": "Delete low vote count",
-                        "url": "/delete-many/low-vote"
+                        "url": "/mongo/delete-many/low-vote"
                     },
                     {
                         "title": "Delete low popularity",
-                        "url": "/delete-many/low-popularity"
+                        "url": "/mongo/delete-many/low-popularity"
                     },
                     {
                         "title": "Delete older than",
-                        "url": "/delete-many/older-than"
+                        "url": "/mongo/delete-many/older-than"
                     },
                     {
                         "title": "Custom Query",
-                        "url": "/delete-many"
+                        "url": "/mongo/delete-many"
                     }
                 ]
             },
@@ -132,34 +132,54 @@
                 "links": [
                     {
                         "title": "Avg rating and movie count",
-                        "url": "/aggregate/avg-rating-movie-genre"
+                        "url": "/mongo/aggregate/avg-rating-movie-genre"
                     },
                     {
                         "title": "Top 5 directors",
-                        "url": "/aggregate/top-5-directors"
+                        "url": "/mongo/aggregate/top-5-directors"
                     },
                     {
                         "title": "Group by release year",
-                        "url": "/aggregate/group-release-popularity"
+                        "url": "/mongo/aggregate/group-release-popularity"
                     },
                     {
                         "title": "Custom Query",
-                        "url": "/aggregate"
+                        "url": "/mongo/aggregate"
                     }
                 ]
             }
         ]
     },
-    "Elasticsearch": {
+    "ElasticSearch": {
         "title": "Elasticsearch",
         "links": [
             {
-                "title": "Elasticsearch Documentation",
-                "url": "https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html"
+                "title": "Recent High Rated Family Movies",
+                "url": "/elastic-search/recent-high-rated-family"
             },
             {
-                "title": "Elasticsearch Training",
-                "url": "https://www.elastic.co/training/"
+                "title": "Movies with Popular Actors",
+                "url": "/elastic-search/movies-popular-actors"
+            },
+            {
+                "title": "Avg Rating By Genre",
+                "url": "/elastic-search/avg-rating-genre"
+            },
+            {
+                "title": "Adventure Movies High Votes",
+                "url": "/elastic-search/adventure-movies-high-votes"
+            },
+            {
+                "title": "Title contains 'Lord of the Rings'",
+                "url": "/elastic-search/title-lord-of-the-rings"
+            },
+            {
+                "title": "'Skywalker' in title or description",
+                "url": "/elastic-search/skywalker-title-description"
+            },
+            {
+                "title": "Custom Query",
+                "url": "/elastic-search"
             }
         ]
     }

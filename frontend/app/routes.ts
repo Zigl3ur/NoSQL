@@ -10,63 +10,117 @@ export default [
     index("./routes/index.tsx"),
 
     // find-one
-    route("/find-one", "./routes/find-one/custom.tsx"),
-    route("/find-one/title", "./routes/find-one/title.tsx"),
-    route("/find-one/rated-genre", "./routes/find-one/rated-genre.tsx"),
-    route("/find-one/actor-recent-movie", "./routes/find-one/actor.tsx"),
-
-    // find-many
-    route("/find-many", "./routes/find-many/custom.tsx"),
-    route("/find-many/genres", "./routes/find-many/genres.tsx"),
+    route("/mongo/find-one", "./routes/mongo/find-one/custom.tsx"),
+    route("/mongo/find-one/title", "./routes/mongo/find-one/title.tsx"),
     route(
-      "/find-many/recent-popular",
-      "./routes/find-many/high-popularity.tsx"
+      "/mongo/find-one/rated-genre",
+      "./routes/mongo/find-one/rated-genre.tsx"
     ),
     route(
-      "/find-many/actors-high-rating",
-      "./routes/find-many/actors-high-rating.tsx"
+      "/mongo/find-one/actor-recent-movie",
+      "./routes/mongo/find-one/actor.tsx"
+    ),
+
+    // find-many
+    route("/mongo/find-many", "./routes/mongo/find-many/custom.tsx"),
+    route("/mongo/find-many/genres", "./routes/mongo/find-many/genres.tsx"),
+    route(
+      "/mongo/find-many/recent-popular",
+      "./routes/mongo/find-many/high-popularity.tsx"
+    ),
+    route(
+      "/mongo/find-many/actors-high-rating",
+      "./routes/mongo/find-many/actors-high-rating.tsx"
     ),
 
     // update-one
-    route("/update-one", "./routes/update-one/custom.tsx"),
-    route("/update-one/rating", "./routes/update-one/rating.tsx"),
-    route("/update-one/genres", "./routes/update-one/genres.tsx"),
-    route("/update-one/vote-count", "./routes/update-one/vote-count.tsx"),
+    route("/mongo/update-one", "./routes/mongo/update-one/custom.tsx"),
+    route("/mongo/update-one/rating", "./routes/mongo/update-one/rating.tsx"),
+    route("/mongo/update-one/genres", "./routes/mongo/update-one/genres.tsx"),
+    route(
+      "/mongo/update-one/vote-count",
+      "./routes/mongo/update-one/vote-count.tsx"
+    ),
 
     // update-many
-    route("/update-many", "./routes/update-many/custom.tsx"),
-    route("/update-many/rating", "./routes/update-many/popularity.tsx"),
-    route("/update-many/popularity", "./routes/update-many/rating.tsx"),
-    route("/update-many/language", "./routes/update-many/language.tsx"),
+    route("/mongo/update-many", "./routes/mongo/update-many/custom.tsx"),
+    route(
+      "/mongo/update-many/rating",
+      "./routes/mongo/update-many/popularity.tsx"
+    ),
+    route(
+      "/mongo/update-many/popularity",
+      "./routes/mongo/update-many/rating.tsx"
+    ),
+    route(
+      "/mongo/update-many/language",
+      "./routes/mongo/update-many/language.tsx"
+    ),
 
     // delete-one
-    route("/delete-one", "./routes/delete-one/custom.tsx"),
-    route("/delete-one/title", "./routes/delete-one/title.tsx"),
-    route("/delete-one/director", "./routes/delete-one/director.tsx"),
-    route("/delete-one/genre", "./routes/delete-one/genre.tsx"),
+    route("/mongo/delete-one", "./routes/mongo/delete-one/custom.tsx"),
+    route("/mongo/delete-one/title", "./routes/mongo/delete-one/title.tsx"),
+    route(
+      "/mongo/delete-one/director",
+      "./routes/mongo/delete-one/director.tsx"
+    ),
+    route("/mongo/delete-one/genre", "./routes/mongo/delete-one/genre.tsx"),
 
     // delete-many
-    route("/delete-many", "./routes/delete-many/custom.tsx"),
-    route("/delete-many/low-vote", "./routes/delete-many/low-vote.tsx"),
+    route("/mongo/delete-many", "./routes/mongo/delete-many/custom.tsx"),
     route(
-      "/delete-many/low-popularity",
-      "./routes/delete-many/low-popularity.tsx"
+      "/mongo/delete-many/low-vote",
+      "./routes/mongo/delete-many/low-vote.tsx"
     ),
-    route("/delete-many/older-than", "./routes/delete-many/older-than.tsx"),
+    route(
+      "/mongo/delete-many/low-popularity",
+      "./routes/mongo/delete-many/low-popularity.tsx"
+    ),
+    route(
+      "/mongo/delete-many/older-than",
+      "./routes/mongo/delete-many/older-than.tsx"
+    ),
 
     // aggregate
-    route("/aggregate", "./routes/aggregate/custom.tsx"),
+    route("/mongo/aggregate", "./routes/mongo/aggregate/custom.tsx"),
     route(
-      "/aggregate/avg-rating-movie-genre",
-      "./routes/aggregate/avg-rating-movie-genre.tsx"
+      "/mongo/aggregate/avg-rating-movie-genre",
+      "./routes/mongo/aggregate/avg-rating-movie-genre.tsx"
     ),
     route(
-      "/aggregate/top-5-directors",
-      "./routes/aggregate/top-5-directors.tsx"
+      "/mongo/aggregate/top-5-directors",
+      "./routes/mongo/aggregate/top-5-directors.tsx"
     ),
     route(
-      "/aggregate/group-release-popularity",
-      "./routes/aggregate/group-release-popularity.tsx"
+      "/mongo/aggregate/group-release-popularity",
+      "./routes/mongo/aggregate/group-release-popularity.tsx"
+    ),
+
+    // elasticsearch
+    route("/elastic-search", "./routes/elastic/custom.tsx"),
+    route(
+      "/elastic-search/recent-high-rated-family",
+      "./routes/elastic/recent-high-rated-family.tsx"
+    ),
+    route(
+      "/elastic-search/movies-popular-actors",
+      "./routes/elastic/movies-popular-actors.tsx"
+    ),
+    route(
+      "/elastic-search/avg-rating-genre",
+      "./routes/elastic/avg-rating-genre.tsx"
+    ),
+    route(
+      "/elastic-search/adventure-movies-high-votes",
+      "./routes/elastic/adventure-movies-high-votes.tsx"
+    ),
+    route(
+      "/elastic-search/title-lord-of-the-rings",
+      "./routes/elastic/title-lord-of-the-rings.tsx"
+    ),
+    route(
+      "/elastic-search/skywalker-title-description",
+      "./routes/elastic/skywalker-title-description.tsx"
     ),
   ]),
 ] satisfies RouteConfig;

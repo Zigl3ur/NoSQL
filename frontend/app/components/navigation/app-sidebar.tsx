@@ -5,6 +5,7 @@ import {
   SidebarFooter,
   SidebarHeader,
 } from "../ui/sidebar";
+import ElasticCollapsible from "./collapsible/elasticsearch-collapsible";
 import MongoCollapsible from "./collapsible/mongo-collapsible";
 import { Link } from "react-router";
 
@@ -19,6 +20,7 @@ export function AppSidebar() {
       </SidebarHeader>
       <SidebarContent className="px-5">
         <MongoCollapsible />
+        <ElasticCollapsible />
       </SidebarContent>
       <SidebarFooter>
         <ResetButton type="MongoDB" endpoint="/api/mongo/init" />

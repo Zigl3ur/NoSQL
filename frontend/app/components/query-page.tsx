@@ -10,7 +10,7 @@ interface PageProps {
   title: string;
   description: string;
   queryJson?: string;
-  custom?: boolean;
+  custom?: "mongo" | "elastic";
   customLimit?: boolean;
   customSort?: boolean;
   customSkip?: boolean;
@@ -46,14 +46,20 @@ export default function QueryPage({
     setLoading(true);
     try {
       const tag = Object.keys(body)[0];
-      let customBody;
+      let customBody = {};
       if (custom) {
-        customBody = {
-          [tag]: JSON.parse(customQuery || "[]"),
-          sort: JSON.parse(sort || "{}"),
-          skip: parseInt(skip),
-          limit: parseInt(limit),
-        };
+        switch (custom) {
+          case "mongo":
+            customBody = {
+              [tag]: JSON.parse(customQuery || "[]"),
+              sort: JSON.parse(sort || "{}"),
+              skip: parseInt(skip),
+              limit: parseInt(limit),
+            };
+            break;
+          default:
+            break;
+        }
       }
 
       const data = await fetch(`${import.meta.env.VITE_BACKEND}${endpoint}`, {
