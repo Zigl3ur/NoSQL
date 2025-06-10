@@ -21,6 +21,29 @@ func NewMovieHandler(movireRepository *repository.MovieRepository) *MovieHandler
 	return &MovieHandler{movieRepository: movireRepository}
 }
 
+func (m *MovieHandler) HandlerInit(c *gin.Context) {
+
+	err := m.movieRepository.DeleteCollection()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	err = m.movieRepository.InitCollection()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"success": "successfully initialized movie collection",
+	})
+	return
+}
+
 // handler to call the db method findOne with given param in body
 func (m *MovieHandler) HandlerGetOne(c *gin.Context) {
 

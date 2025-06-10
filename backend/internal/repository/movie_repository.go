@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"nosql/backend/internal/models"
+	"os"
 
 	"go.mongodb.org/mongo-driver/v2/bson"
 	"go.mongodb.org/mongo-driver/v2/mongo"
@@ -31,6 +32,43 @@ var (
 // get the movie collection
 func NewMovieRepo(client *mongo.Client, dbName string) *MovieRepository {
 	return &MovieRepository{collection: client.Database(dbName).Collection("movies")}
+}
+
+// delete the movie collection
+func (mrepo *MovieRepository) DeleteCollection() error {
+	if mrepo.collection == nil {
+		return errorCollection
+	}
+
+	err := mrepo.collection.Drop(context.TODO())
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// initialize the movie collection with data
+func (mrepo *MovieRepository) InitCollection() error {
+
+	json, err := os.ReadFile("../movies.json")
+	if err != nil {
+		return err
+	}
+
+	var movies []models.Movie
+	if err = bson.UnmarshalExtJSON(json, true, &movies); err != nil {
+		return err
+	}
+
+	if len(movies) > 0 {
+		_, err = mrepo.collection.InsertMany(context.TODO(), movies)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
 }
 
 // get one document from movie collection with given filter

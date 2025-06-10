@@ -34,11 +34,13 @@ func Setup(r *gin.Engine, client *mongo.Client, esClient *elasticsearch.Client, 
 			movieHandler.HandlerDelete(c, repository.Many)
 		})
 		mongo.POST("/aggregate", movieHandler.HandlerAggregate)
+		mongo.PUT("/init", movieHandler.HandlerInit)
 	}
 
 	elastic := r.Group("/api/elastic")
 	{
 		elastic.GET("/count", elasticHandler.HandlerCount)
-		elastic.GET("/search", elasticHandler.HandlerSearch)
+		elastic.POST("/search", elasticHandler.HandlerSearch)
+		elastic.PUT("/init", elasticHandler.HandlerInit)
 	}
 }
