@@ -10,7 +10,7 @@ export default function UpdateOneVoteCountRoute() {
     <QueryPage
       headerTitle="Update One"
       title="Update a movie by increasing its vote count"
-      description="Update a movie in the movie collection by its vote count with the given value "
+      description="Update a movie by its vote count with the given value"
       queryJson={`db.movies.updateOne(
   { title: "Pacific Rim" },
   { $inc: { vote_count: 76 } }

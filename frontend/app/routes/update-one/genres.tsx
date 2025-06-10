@@ -10,7 +10,7 @@ export default function UpdateOneGenreRoute() {
     <QueryPage
       headerTitle="Update One"
       title="Update a movie by adding a genre"
-      description="Update a movie by adding the given genre to it in the movie collection"
+      description="Update a movie by adding the given genre to it"
       queryJson={`db.movies.updateOne(
   { title: "Star Wars" },
   { $addToSet: { genres: "Star Wars Trilogy" } }

@@ -10,7 +10,7 @@ export default function DeleteOneGenreRoute() {
     <QueryPage
       headerTitle="Delete One"
       title="Delete Oneby Genre"
-      description="Delete a movie in the collection by its genre"
+      description="Delete a movie by its genre"
       queryJson={`db.movies.deleteOne({ genres: "Family" });`}
       endpoint="/api/mongo/delete-one"
       method="DELETE"

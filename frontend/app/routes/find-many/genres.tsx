@@ -10,7 +10,7 @@ export default function FidnManyWithGenresRouter() {
     <QueryPage
       headerTitle="Find Many"
       title="Find movies by genres"
-      description="Find multiple movies by given genres in the movie collection"
+      description="Find multiple movies by given genres"
       queryJson={`db.movies.find(
   { genres: { $all: ["Comedy", "Fantasy"] } },
   { title: 1, genres: 1, rating: 1 }

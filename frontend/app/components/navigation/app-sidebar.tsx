@@ -1,3 +1,4 @@
+import ResetButton from "../reset-button";
 import {
   Sidebar,
   SidebarContent,
@@ -10,7 +11,7 @@ import { Link } from "react-router";
 export function AppSidebar() {
   return (
     <Sidebar>
-      <SidebarHeader className="mx-5 my-2">
+      <SidebarHeader>
         <Link to="/" className="font-bold text-2xl flex items-center gap-2">
           <img src="/favicon.ico" alt="NoSQL Logo" className="w-8 h-8" />
           <h1>NoSQL</h1>
@@ -19,7 +20,10 @@ export function AppSidebar() {
       <SidebarContent className="px-5">
         <MongoCollapsible />
       </SidebarContent>
-      <SidebarFooter />
+      <SidebarFooter>
+        <ResetButton type="MongoDB" endpoint="/api/mongo/init" />
+        <ResetButton type="ElasticSearch" endpoint="/api/elastic/init" />
+      </SidebarFooter>
     </Sidebar>
   );
 }

@@ -10,7 +10,7 @@ export default function UpdateManyLanguageRoute() {
     <QueryPage
       headerTitle="Update Many"
       title="Update movies en Language to en-US"
-      description="Update movies in the movie collection by updating the language en to en-US"
+      description="Update movies by updating the language en to en-US"
       queryJson={`db.movies.updateMany(
   { release_date: { $regex: "^2025" } },
   { $set: { language: "en-US" } }

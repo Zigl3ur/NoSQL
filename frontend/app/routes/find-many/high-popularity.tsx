@@ -10,7 +10,7 @@ export default function HighPopularity2025Route() {
     <QueryPage
       headerTitle="Find Many"
       title="Find movies by high popularity in 2025"
-      description="Find multiple movies by there popularity in the year 2025 in the movie collection"
+      description="Find multiple movies by there popularity in the year 2025"
       queryJson={`db.movies.find(
   { release_date: { $regex: "^2025" }, popularity: { $gte: 250 } },
   { title: 1, release_date: 1, popularity: 1 }

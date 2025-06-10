@@ -1,8 +1,8 @@
 import { Outlet } from "react-router";
-import Header from "./components/navigation/header";
 import { SidebarProvider } from "./components/ui/sidebar";
 import { AppSidebar } from "./components/navigation/app-sidebar";
 import { ThemeProvider } from "./components/theme/theme-provider";
+import { Toaster } from "sonner";
 
 export default function RootLayout() {
   return (
@@ -12,6 +12,7 @@ export default function RootLayout() {
         <main className="mx-5 w-full">
           <Outlet />
         </main>
+        <Toaster />
       </SidebarProvider>
     </ThemeProvider>
   );

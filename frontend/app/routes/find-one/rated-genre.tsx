@@ -10,7 +10,7 @@ export default function FindRatedGenreRoute() {
     <QueryPage
       headerTitle="Find One"
       title="Find the highest rated movie by genre"
-      description="Find the highest rated movie in the collection by its genre"
+      description="Find the highest rated movie by its genre"
       queryJson={`db.movies.findOne(
   { genres: "Adventure" },
   { title: 1, rating: 1, release_date: 1 },
