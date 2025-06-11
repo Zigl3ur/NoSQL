@@ -25,10 +25,6 @@ export function AppSidebar() {
           DataViz
         </Link>
       </SidebarContent>
-      <SidebarFooter>
-        <ResetButton type="MongoDB" endpoint="/api/mongo/init" />
-        <ResetButton type="ElasticSearch" endpoint="/api/elastic/init" />
-      </SidebarFooter>
     </Sidebar>
   );
 }
