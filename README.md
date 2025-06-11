@@ -20,7 +20,7 @@ The project was made to learn non relational databases like MongoDB and text sea
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/Zigl3ur/nosql.git
+   git clone https://github.com/Zigl3ur/NoSQL.git
    cd nosql
    ```
 
