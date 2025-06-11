@@ -12,7 +12,7 @@ export default function MongoCollapsible() {
   return (
     <Collapsible defaultOpen className="group/collapsible">
       <SidebarGroup>
-        <CollapsibleTrigger className="flex items-center justify-between w-full pb-2">
+        <CollapsibleTrigger className="flex items-center justify-between w-full">
           MongoDB
           <ChevronDown className="h-5 w-5 transition-transform group-data-[state=open]/collapsible:rotate-180" />
         </CollapsibleTrigger>

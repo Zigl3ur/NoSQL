@@ -39,7 +39,7 @@ func Setup(r *gin.Engine, client *mongo.Client, esClient *elasticsearch.Client, 
 
 	elastic := r.Group("/api/elastic")
 	{
-		elastic.GET("/count", elasticHandler.HandlerCount)
+		// elastic.GET("/count", elasticHandler.HandlerCount)
 		elastic.POST("/search", elasticHandler.HandlerSearch)
 		elastic.PUT("/init", elasticHandler.HandlerInit)
 	}

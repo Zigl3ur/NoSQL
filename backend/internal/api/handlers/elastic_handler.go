@@ -31,7 +31,7 @@ func (h *ElasticHandler) HandlerInit(c *gin.Context) {
 	)
 
 	if err != nil || res.IsError() {
-		c.JSON(500, gin.H{"error": "Failed to delete index: "})
+		c.JSON(500, gin.H{"error": "Failed to delete index"})
 		return
 	}
 	defer res.Body.Close()
@@ -89,29 +89,29 @@ func (h *ElasticHandler) HandlerInit(c *gin.Context) {
 	return
 }
 
-// handler that return the count of documents in the "movies" index
-func (h *ElasticHandler) HandlerCount(c *gin.Context) {
+// // handler that return the count of documents in the "movies" index
+// func (h *ElasticHandler) HandlerCount(c *gin.Context) {
 
-	res, err := h.esClient.Count(
-		h.esClient.Count.WithIndex("movies"),
-	)
-	if err != nil {
-		c.JSON(500, gin.H{"error": err.Error()})
-		return
-	}
-	defer res.Body.Close()
+// 	res, err := h.esClient.Count(
+// 		h.esClient.Count.WithIndex("movies"),
+// 	)
+// 	if err != nil {
+// 		c.JSON(500, gin.H{"error": err.Error()})
+// 		return
+// 	}
+// 	defer res.Body.Close()
 
-	var result map[string]any
-	if err := json.NewDecoder(res.Body).Decode(&result); err != nil {
-		c.JSON(500, gin.H{"error": err.Error()})
-		return
-	}
+// 	var result map[string]any
+// 	if err := json.NewDecoder(res.Body).Decode(&result); err != nil {
+// 		c.JSON(500, gin.H{"error": err.Error()})
+// 		return
+// 	}
 
-	c.JSON(http.StatusOK, gin.H{
-		"count": result["count"],
-	})
-	return
-}
+// 	c.JSON(http.StatusOK, gin.H{
+// 		"count": result["count"],
+// 	})
+// 	return
+// }
 
 // handler that search in the "movies" index
 func (h *ElasticHandler) HandlerSearch(c *gin.Context) {

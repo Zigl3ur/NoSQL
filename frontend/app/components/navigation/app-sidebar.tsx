@@ -12,15 +12,18 @@ import { Link } from "react-router";
 export function AppSidebar() {
   return (
     <Sidebar>
-      <SidebarHeader>
+      <SidebarHeader className="p-5">
         <Link to="/" className="font-bold text-2xl flex items-center gap-2">
-          <img src="/favicon.ico" alt="NoSQL Logo" className="w-8 h-8" />
+          <img src="/favicon.ico" alt="NoSQL Logo" className="w-6 h-6" />
           <h1>NoSQL</h1>
         </Link>
       </SidebarHeader>
       <SidebarContent className="px-5">
         <MongoCollapsible />
         <ElasticCollapsible />
+        <Link to="/dataviz" className="p-2">
+          DataViz
+        </Link>
       </SidebarContent>
       <SidebarFooter>
         <ResetButton type="MongoDB" endpoint="/api/mongo/init" />

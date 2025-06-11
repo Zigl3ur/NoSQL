@@ -4,6 +4,10 @@
 
 ### _MongoDB_
 
+- **PUT** `/api/mongo/init` - Reset MongoDB with fresh data
+
+  - **Body**: No body required
+
 - **POST** `/api/mongo/find-one` - Find one document
 
   - **Body**:
@@ -73,5 +77,25 @@
       "delete": [
         { "actors": "Jack Black" } // filter
       ]
+    }
+    ```
+
+### _ElasticSearch_
+
+- **PUT** `/api/elastic/init` - Reset ElasticSearch index with fresh data
+
+  - **Body**: No body required
+
+- **POST** `/api/elastic/search` - Search in ElasticSearch with given query
+
+  - **Body**:
+    ```json
+    {
+      "query": {
+        "match": {
+          "title": "Star Wars"
+        }
+      },
+      "size": 10
     }
     ```

@@ -1,11 +1,11 @@
 services:
-  nosql-mongo:
+  mongodb:
     image: mongo:latest
     container_name: nosql-mongo
     restart: unless-stopped
     ports:
       - "27017:27017"
-  nosql-elasticsearch:
+  elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:9.0.2
     container_name: nosql-elasticsearch
     restart: unless-stopped
@@ -19,7 +19,7 @@ services:
         limits:
           memory: 1024M
 
-  nosql-backend:
+  backend:
     container_name: nosql-backend
     build:
       context: ./backend
@@ -32,11 +32,11 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - nosql-mongo
-      - nosql-elasticsearch
+      - mongodb
+      - elasticsearch
     restart: unless-stopped
 
-  nosql-frontend:
+  frontend:
     container_name: nosql-frontend
     build:
       context: ./frontend
@@ -46,7 +46,7 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - nosql-backend
+      - backend
     restart: unless-stopped
 
 networks:

@@ -122,5 +122,8 @@ export default [
       "/elastic-search/skywalker-title-description",
       "./routes/elastic/skywalker-title-description.tsx"
     ),
+
+    // charts
+    route("/dataviz", "./routes/dataviz/index.tsx"),
   ]),
 ] satisfies RouteConfig;
