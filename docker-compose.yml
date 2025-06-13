@@ -42,7 +42,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     env_file:
-      - path: ./frontend/.env.production
+      - path: "./frontend/.env.production"
         required: true
     ports:
       - "3000:3000"

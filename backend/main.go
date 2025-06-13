@@ -31,9 +31,9 @@ func main() {
 	router := gin.Default()
 
 	router.Use(cors.New(cors.Config{
-		AllowOrigins: []string{"http://localhost:3000"},
-		AllowMethods: []string{"POST", "PUT", "DELETE"},
-		AllowHeaders: []string{"Content-Type"},
+		AllowAllOrigins: true,
+		AllowMethods:    []string{"POST", "PUT", "DELETE"},
+		AllowHeaders:    []string{"Content-Type"},
 	}))
 
 	routes.Setup(router, client, elasticClient, *config)
