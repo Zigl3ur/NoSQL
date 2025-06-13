@@ -41,8 +41,9 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    environment:
-      - VITE_BACKEND=http://nosql-backend:8080
+    env_file:
+      - path: ./frontend/.env.production
+        required: true
     ports:
       - "3000:3000"
     depends_on:
