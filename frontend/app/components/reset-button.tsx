@@ -41,7 +41,7 @@ export default function ResetButton({ type, endpoint }: ResetButtonProps) {
   return (
     <Button variant="destructive" onClick={reset}>
       {loading && <Loader2 className="animate-spin" />}
-      Init/Reset {type}
+      Reset {type}
     </Button>
   );
 }

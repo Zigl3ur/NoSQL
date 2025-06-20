@@ -2,6 +2,11 @@ import { MoviesRatingPie } from "~/components/charts/movies-rating-pie";
 import { TopGenresBarsChart } from "~/components/charts/top-genres-chart";
 import { YearLineChart } from "~/components/charts/year-line-charts";
 import Header from "~/components/navigation/header";
+import type { Route } from "../+types";
+
+export function meta({}: Route.MetaArgs) {
+  return [{ title: "NoSQL - DataViz" }];
+}
 
 export default function ChartsRoute() {
   return (

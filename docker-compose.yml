@@ -3,8 +3,14 @@ services:
     image: mongo:latest
     container_name: nosql-mongo
     restart: unless-stopped
+    environment:
+      MONGO_INITDB_DATABASE: nosql
+    volumes:
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js
+      - ./backend/movies.json:/docker-entrypoint-initdb.d/movies.json
     ports:
       - "27017:27017"
+
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:9.0.2
     container_name: nosql-elasticsearch
@@ -27,7 +33,7 @@ services:
     environment:
       - PORT=8080
       - MONGO_URI=mongodb://nosql-mongo:27017
-      - MONGO_DB=projet
+      - MONGO_DB=nosql
       - ELASTIC_URL=http://nosql-elasticsearch:9200
     ports:
       - "8080:8080"

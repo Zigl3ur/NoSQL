@@ -24,6 +24,9 @@ The project was made to learn non relational databases like MongoDB and text sea
    cd nosql
    ```
 
+> [!IMPORTANT]
+> You may need to adjust `VITE_BACKEND` variable in `.env.production` file to match the backend URL if you are running the backend on a different port or host.
+
 2. Run with Docker:
 
    ```bash

@@ -41,7 +41,6 @@ func (m *MovieHandler) HandlerInit(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"success": "successfully initialized movie collection",
 	})
-	return
 }
 
 // handler to call the db method findOne with given param in body
@@ -111,7 +110,6 @@ func (m *MovieHandler) HandlerGetOne(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, result)
-	return
 }
 
 // handler to call the db method findMany with given param in body
@@ -188,7 +186,6 @@ func (m *MovieHandler) HandlerGetMany(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, result)
-	return
 }
 
 // handler to call the db method updateOne with given param in body
@@ -246,7 +243,6 @@ func (m *MovieHandler) HandlerUpdate(c *gin.Context, editType repository.EditSco
 	c.JSON(http.StatusOK, gin.H{
 		"success": "successfully updated document(s)",
 	})
-	return
 }
 
 // handler to call the db method deleteOne or Many with given param in body
@@ -303,7 +299,6 @@ func (m *MovieHandler) HandlerDelete(c *gin.Context, deleteType repository.EditS
 	c.JSON(http.StatusOK, gin.H{
 		"success": "successfully deleted document(s)",
 	})
-	return
 }
 
 // handler to call the db method aggregate with given param in body
@@ -347,5 +342,4 @@ func (m *MovieHandler) HandlerAggregate(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, result)
-	return
 }

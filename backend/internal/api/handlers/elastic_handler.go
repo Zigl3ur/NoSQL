@@ -1,10 +1,9 @@
 package handlers
 
 import (
-	"bytes"
 	"encoding/json"
 	"net/http"
-	"os"
+	"nosql/backend/internal/db"
 
 	"github.com/elastic/go-elasticsearch/v9"
 	"github.com/gin-gonic/gin"
@@ -24,69 +23,19 @@ func NewElasticHandler(esClient *elasticsearch.Client) *ElasticHandler {
 // handler that recreate the index with the data
 func (h *ElasticHandler) HandlerInit(c *gin.Context) {
 
-	// delete old index
-	res, err := h.esClient.Indices.Delete(
-		[]string{"movies"},
-		h.esClient.Indices.Delete.WithIgnoreUnavailable(true),
-	)
-
-	if err != nil || res.IsError() {
-		c.JSON(500, gin.H{"error": "Failed to delete index"})
-		return
-	}
-	defer res.Body.Close()
-
-	// index mapping
-	mapping := `{
-		"mappings": {
-			"properties": {
-				"title": { "type": "text" },
-				"language": { "type": "text" },
-				"release_date": { "type": "date" },
-				"genres": { "type": "keyword" },
-				"description": { "type": "text" },
-				"actors": { "type": "keyword" },
-				"directors": { "type": "keyword" },
-				"popularity": { "type": "float" },
-				"rating": { "type": "float" },
-				"vote_count": { "type": "integer" }
-			}
-		}
-	}`
-
-	// create index with the mapping
-	res, err = h.esClient.Indices.Create(
-		"movies",
-		h.esClient.Indices.Create.WithBody(bytes.NewReader([]byte(mapping))),
-	)
-
-	if err != nil || res.IsError() {
-		c.JSON(500, gin.H{"error": "Failed to create index"})
-		return
-	}
-	defer res.Body.Close()
-
-	bulkJson, err := os.ReadFile("./bulk-movies.json")
+	// false so we dont wait for elasticsearch to be started
+	err := db.ElasticInitData(h.esClient, false)
 
 	if err != nil {
-		c.JSON(500, gin.H{"error": "Failed to read bulk JSON file"})
-	}
-
-	// insert the bulk data
-	res, err = h.esClient.Bulk(
-		bytes.NewReader(bulkJson),
-	)
-
-	if err != nil || res.IsError() {
-		c.JSON(500, gin.H{"error": "Failed to insert bulk data"})
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": err.Error(),
+		})
 		return
 	}
-	defer res.Body.Close()
 
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Index created successfully",
 	})
-	return
 }
 
 // // handler that return the count of documents in the "movies" index
@@ -148,5 +97,4 @@ func (h *ElasticHandler) HandlerSearch(c *gin.Context) {
 		"total":        result["hits"].(map[string]any)["total"],
 		"aggregations": result["aggregations"],
 	})
-	return
 }
