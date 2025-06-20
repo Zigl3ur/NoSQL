@@ -57,6 +57,9 @@ export default function QueryPage({
               limit: parseInt(limit),
             };
             break;
+          case "elastic":
+            customBody = JSON.parse(customQuery || "{}");
+            break;
           default:
             break;
         }
